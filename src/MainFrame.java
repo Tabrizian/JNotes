@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,10 +13,11 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class MainFrame extends JFrame {
-
+	
 	public MainFrame() {
 		try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+			UIManager
+					.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -29,6 +31,7 @@ public class MainFrame extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		new User("Iman", "Tabrizian", "Iman", "123", "H", new Date(1393,12,12));
 		setLayout(new BorderLayout());
 		setSize(400, 600);
 		setLocation(400, 50);

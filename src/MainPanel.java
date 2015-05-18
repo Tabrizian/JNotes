@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -72,7 +74,16 @@ public class MainPanel extends JPanel {
 		gc.gridx = 1;
 		gc.gridy = 3;
 		add(login, gc);
-
+		
+		ActionListener listener = (ActionEvent) -> {
+			if(UsersDataBase.getUsersDataBase().checkValidity(username.getText(), new String(password.getPassword()))){
+				new ManagementFrame();
+			}
+				
+				
+		};
+		
+		login.addActionListener(listener);
 		img = getToolkit().getImage("pics/blue_and_red.jpg");
 	}
 
