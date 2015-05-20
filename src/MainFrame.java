@@ -15,22 +15,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class MainFrame extends JFrame {
 	
 	public MainFrame() {
-		try {
-			UIManager
-					.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		new User("Iman", "Tabrizian", "Iman", "123", "H", new Date(1393,12,12));
 		setLayout(new BorderLayout());
 		setSize(400, 600);

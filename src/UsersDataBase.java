@@ -1,12 +1,15 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UsersDataBase {
 
 	private HashMap<String, String> userAndPass;
+	private ArrayList<User> users;
 	private static UsersDataBase instance = null;
 
 	private UsersDataBase() {
 		userAndPass = new HashMap<>();
+		users = new ArrayList<>();
 	}
 
 	public static UsersDataBase getUsersDataBase() {
@@ -18,6 +21,7 @@ public class UsersDataBase {
 
 	public void addUser(User user) {
 		userAndPass.put(user.getUsername(), user.getPassword());
+		users.add(user);
 	}
 
 	public boolean checkValidity(String username, String password) {

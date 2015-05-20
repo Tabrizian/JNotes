@@ -11,7 +11,7 @@ public class ManagementFrame extends JFrame {
 		setSize(400, 600);
 		setLocation(400, 50);
 
-		add(new MainPanel(), BorderLayout.CENTER);
+		add(new ManagementPanel(), BorderLayout.CENTER);
 		setUndecorated(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
