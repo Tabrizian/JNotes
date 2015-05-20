@@ -1,22 +1,32 @@
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
 
-public class Toolbar extends JToolBar {
+public class MToolbar extends JToolBar {
 
 	private JButton add;
 	private JButton search;
 	private JButton manage;
 	private JButton exit;
 
-	public Toolbar() {
+	public MToolbar() {
 		add = new JButton(makeGoodIcon("pics/Add-01.png"));
 		search = new JButton(makeGoodIcon("pics/Magnifier-01.png"));
 		manage = new JButton(makeGoodIcon("pics/Settings-01.png"));
 		exit = new JButton(makeGoodIcon("pics/Power-02.png"));
+
+		ActionListener listenerAdd = (ActionEvent e)->{
+			ManagementFrame.getManagementFrame().dispose();
+			new EditingFrame();
+		};
+		
+		add.addActionListener(listenerAdd);
+		
 		
 		setOrientation(VERTICAL);
 		setFloatable(false);

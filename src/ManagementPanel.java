@@ -22,7 +22,7 @@ public class ManagementPanel extends JPanel {
 		
 		setLayout(new BorderLayout());
 		
-		toolbar = new Toolbar();
+		toolbar = new MToolbar();
 		
 			
 		add(toolbar,BorderLayout.WEST);

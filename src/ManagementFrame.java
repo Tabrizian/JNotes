@@ -1,12 +1,13 @@
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 public class ManagementFrame extends JFrame {
-	public ManagementFrame() {
-		
+
+	private static ManagementFrame instance = null;
+
+	private ManagementFrame() {
+
 		setLayout(new BorderLayout());
 		setSize(400, 600);
 		setLocation(400, 50);
@@ -15,5 +16,11 @@ public class ManagementFrame extends JFrame {
 		setUndecorated(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
+	}
+
+	public static ManagementFrame getManagementFrame() {
+		if (instance == null)
+			instance = new ManagementFrame();
+		return instance;
 	}
 }
