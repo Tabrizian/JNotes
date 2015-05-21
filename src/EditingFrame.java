@@ -30,4 +30,8 @@ public class EditingFrame extends JFrame {
 		
 	}
 	
+	public JEditorPane getEditingPane(){
+		return editingPane;
+	}
+	
 }

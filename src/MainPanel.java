@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ public class MainPanel extends JPanel {
 	private GridBagConstraints gc;
 	private Image img;
 	private JButton login;
+	private JButton signup;
 	private JLabel loginLabel;
 
 	public MainPanel() {
@@ -34,6 +36,7 @@ public class MainPanel extends JPanel {
 		loginLabel.setFont(new Font("Arial", Font.BOLD, 45));
 		loginLabel.setForeground(Color.WHITE);
 		login = new JButton("Sign in");
+		signup = new JButton("Signup");
 
 		usernameLbl.setForeground(Color.WHITE);
 		passwordLbl.setForeground(Color.WHITE);
@@ -73,8 +76,13 @@ public class MainPanel extends JPanel {
 		gc.gridx = 1;
 		gc.gridy = 3;
 		add(login, gc);
+		
+		gc.weighty = 0.75;
+		gc.gridx = 0;
+		gc.gridy = 3;
+		add(signup, gc);
 
-		ActionListener listener = (ActionEvent) -> {
+		ActionListener listenerLogin = (ActionEvent e) -> {
 			if (UsersDataBase.getUsersDataBase().checkValidity(
 					username.getText(), new String(password.getPassword()))) {
 				MainFrame.getMainFrame().dispose();
@@ -82,8 +90,16 @@ public class MainPanel extends JPanel {
 			}
 
 		};
+		
+		ActionListener listenerSignup = (ActionEvent e) -> {
+			
+				MainFrame.getMainFrame().dispose();
+				new SignupFrame();
 
-		login.addActionListener(listener);
+		};
+
+		login.addActionListener(listenerLogin);
+		signup.addActionListener(listenerSignup);
 		img = getToolkit().getImage("pics/blue_and_red.jpg");
 	}
 

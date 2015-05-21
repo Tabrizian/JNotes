@@ -4,10 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.ObjectOutputStream;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JToolBar;
+
+import org.apache.commons.io.FileUtils;
 
 
 public class EToolbar extends JToolBar {
@@ -21,19 +24,27 @@ public class EToolbar extends JToolBar {
 	
 	
 	public EToolbar(){
+		
 		save = new JButton(makeGoodIcon("pics/save.png"));
 		bold = new JButton(makeGoodIcon("pics/font_bold.png"));
 		italic = new JButton(makeGoodIcon("pics/font_italic.png"));
 		underline = new JButton(makeGoodIcon("pics/font_underline.png"));
 		fonts = new JComboBox<>();
 		size = new JComboBox<>();
-	
+		fonts.addItem("Hello");
+		
+		for (int i = 1; i <= 40; i++) {
+			size.addItem(i);
+		}
+		
 		setFloatable(false);
 		
 		add(bold);
 		add(italic);
 		add(underline);
 		add(save);
+		add(fonts);
+		add(size);
 		
 	}
 	

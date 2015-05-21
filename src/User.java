@@ -20,7 +20,6 @@ public class User {
 		this.password = password;
 		this.degree = degree;
 		this.dateOfBirth = dateOfBirth;
-		UsersDataBase.getUsersDataBase().addUser(this);;
 	}
 
 	public String getFirstName() {
@@ -69,6 +68,17 @@ public class User {
 	
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof User){
+			User user = (User) obj;
+			if(!user.getUsername().equals(getUsername())){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }
