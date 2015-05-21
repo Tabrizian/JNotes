@@ -21,7 +21,7 @@ public class MToolbar extends JToolBar {
 		exit = new JButton(makeGoodIcon("pics/Power-02.png"));
 
 		ActionListener listenerAdd = (ActionEvent e)->{
-			ManagementFrame.getManagementFrame().dispose();
+			ManagementFrame.getManagementFrame().delete();
 			new EditingFrame();
 		};
 		

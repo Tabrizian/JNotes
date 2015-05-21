@@ -25,4 +25,9 @@ public class MainFrame extends JFrame {
 			instance = new MainFrame();
 		return instance;
 	}
+	
+	public void delete(){
+		dispose();
+		instance = null;
+	}
 }

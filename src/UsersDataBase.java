@@ -1,9 +1,14 @@
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class UsersDataBase {
 
@@ -29,16 +34,22 @@ public class UsersDataBase {
 			userAndPass.put(user.getUsername(), user.getPassword());
 			users.add(user);
 			return true;
-		}else{
-			if(!users.contains(user)){
+		} else {
+			if (!users.contains(user)) {
 				userAndPass.put(user.getUsername(), user.getPassword());
 				users.add(user);
 				return true;
-			}
-			else{
+			} else {
 				return false;
 			}
 		}
+	}
+
+	public void addUser(User user) {
+		userAndPass.put(user.getUsername(), user.getPassword());
+		users.add(user);
+		writeUser(user);
+
 	}
 
 	public boolean checkValidity(String username, String password) {
@@ -51,22 +62,56 @@ public class UsersDataBase {
 
 	public void getInitialUsers() {
 		File users = new File("data/users.txt");
-		Scanner scanner = null;
+		InputStream in = null;
+		ObjectInputStream object = null;
 		try {
-			scanner = new Scanner(users);
+			in = new FileInputStream(users);
+			
+			while (in.available() > 0) {
+				User user;
+				object = new ObjectInputStream(in);
+				user = (User) object.readObject();
+				addUser(user, false);
+
+			}
+
+			in.close();
+			object.close();
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		while (scanner.hasNext()) {
-			String firstName = scanner.next();
-			String lastName = scanner.next();
-			String username = scanner.next();
-			String password = scanner.next();
-			String degree = scanner.next();
-			Date dateOfBirth = new Date(scanner.next());
-			addUser(new User(firstName, lastName, username, password, degree,
-					dateOfBirth), false);
+
+	}
+
+	public void writeUser(User user) {
+		OutputStream out = null;
+		ObjectOutputStream object = null;
+		try {
+			out = new FileOutputStream(new File("data/users.txt"), true);
+			object = new ObjectOutputStream(out);
+			object.writeObject(user);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				out.close();
+				object.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

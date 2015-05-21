@@ -4,8 +4,8 @@ import javax.swing.JFrame;
 
 
 public class SignupFrame extends JFrame {
-	
-	public SignupFrame(){
+	private static SignupFrame instance = null;
+	private SignupFrame(){
 		super();
 		
 		setLayout(new BorderLayout());
@@ -14,9 +14,20 @@ public class SignupFrame extends JFrame {
 		
 		setSize(300, 300);
 		setLocation(400, 50);
-		setUndecorated(true);
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
+	}
+	
+	public static SignupFrame getSignupFrame(){
+		if(instance == null)
+			instance = new SignupFrame();
+		return instance;
+	}
+	
+	public void delete(){
+		dispose();
+		instance = null;
 	}
 	
 }

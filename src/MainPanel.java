@@ -85,7 +85,7 @@ public class MainPanel extends JPanel {
 		ActionListener listenerLogin = (ActionEvent e) -> {
 			if (UsersDataBase.getUsersDataBase().checkValidity(
 					username.getText(), new String(password.getPassword()))) {
-				MainFrame.getMainFrame().dispose();
+				MainFrame.getMainFrame().delete();
 				ManagementFrame.getManagementFrame();
 			}
 
@@ -93,9 +93,8 @@ public class MainPanel extends JPanel {
 		
 		ActionListener listenerSignup = (ActionEvent e) -> {
 			
-				MainFrame.getMainFrame().dispose();
-				new SignupFrame();
-
+				MainFrame.getMainFrame().delete();
+				SignupFrame.getSignupFrame();
 		};
 
 		login.addActionListener(listenerLogin);

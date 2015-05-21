@@ -23,4 +23,9 @@ public class ManagementFrame extends JFrame {
 			instance = new ManagementFrame();
 		return instance;
 	}
+	
+	public void delete(){
+		dispose();
+		instance = null;
+	}
 }

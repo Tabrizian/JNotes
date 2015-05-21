@@ -19,13 +19,12 @@ public class ManagementPanel extends JPanel {
 
 	public ManagementPanel() {
 		img = getToolkit().getImage("pics/blue_and_red.jpg");
-		
+
 		setLayout(new BorderLayout());
-		
+
 		toolbar = new MToolbar();
-		
-			
-		add(toolbar,BorderLayout.WEST);
+
+		add(toolbar, BorderLayout.WEST);
 	}
 
 	@Override
@@ -34,5 +33,5 @@ public class ManagementPanel extends JPanel {
 		arg0.drawImage(img, 0, 0, getWidth(), getHeight(), null);
 		repaint();
 	}
-	
+
 }
