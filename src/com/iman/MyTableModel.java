@@ -11,8 +11,9 @@ import javax.swing.table.AbstractTableModel;
 public class MyTableModel extends AbstractTableModel {
 
 	private File[] goodFiles;
-
+	private User user;
 	public MyTableModel(User user) {
+		this.user = user;
 		File f = new File("data");
 		goodFiles = f.listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String name) {
@@ -84,6 +85,16 @@ public class MyTableModel extends AbstractTableModel {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void refresh(){
+		File f = new File("data");
+		goodFiles = f.listFiles(new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				return name.startsWith(user.getUsername());
+			}
+		});
+		fireTableDataChanged();
 	}
 
 }

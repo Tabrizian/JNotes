@@ -52,14 +52,28 @@ public class ListOfFilesFrame extends JFrame {
 				}
 			}
 		});
-		
+
+		delete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+				if (row != -1) {
+					Note note = model.getRowAt(row);
+					note.delete();
+					model.refresh();
+				}
+			}
+
+		});
+
 		back.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				ManagementFrame.getManagementFrame(user);
-				
+
 			}
 		});
 

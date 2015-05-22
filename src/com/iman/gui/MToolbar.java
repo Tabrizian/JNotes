@@ -51,7 +51,18 @@ public class MToolbar extends JToolBar {
 				new SearchFrame();
 			}
 		});
+		
+		exit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ManagementFrame.getManagementFrame(user).delete();
+				MainFrame.getMainFrame();
+			}
+		});
 		setOrientation(VERTICAL);
+		
+		
 		setFloatable(false);
 
 		add(add);

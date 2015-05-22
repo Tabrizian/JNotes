@@ -28,7 +28,7 @@ public class EditingFrame extends JFrame {
 		add(editingPane, BorderLayout.CENTER);
 
 		setUndecorated(true);
-		setSize(400, 600);
+		setSize(600, 600);
 		setLocation(400, 50);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
