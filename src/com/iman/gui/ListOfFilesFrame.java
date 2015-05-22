@@ -52,6 +52,16 @@ public class ListOfFilesFrame extends JFrame {
 				}
 			}
 		});
+		
+		back.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ManagementFrame.getManagementFrame(user);
+				
+			}
+		});
 
 		toolbar.add(show);
 		toolbar.add(delete);

@@ -130,22 +130,20 @@ public class Note implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-	public static Note noteExist(String name){
+
+	public static Note noteExist(String name) {
 		File f = new File("data");
 		File[] goodFiles = f.listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String name) {
 				return name.startsWith(name);
 			}
 		});
-		if(goodFiles == null){
+		if (goodFiles == null) {
 			return null;
-		}
-		else
-		{
+		} else {
 			try {
-				ObjectInputStream in = new ObjectInputStream(new FileInputStream(
-						goodFiles[0]));
+				ObjectInputStream in = new ObjectInputStream(
+						new FileInputStream(goodFiles[0]));
 				Note note = (Note) in.readObject();
 				in.close();
 				return note;
@@ -162,15 +160,25 @@ public class Note implements Serializable {
 			return null;
 		}
 	}
-	
-	public void updateNote(String title, JTextPane editingPane, User user, String keyword){
-		this.title =title;
+
+	public void updateNote(String title, JTextPane editingPane, User user,
+			String keyword) {
+		this.title = title;
 		this.text = editingPane.getText();
 		this.styleOfDocument = editingPane.getStyledDocument();
 		this.keywords = keyword.split(",");
 		this.date = new Date();
 		this.user = user;
-		
+
+	}
+
+	public String[] getKeywords() {
+		return keywords;
+	}
+
+	public void delete() {
+		File file = new File("data/" + user.getUsername() + id);
+		file.delete();
 	}
 
 }

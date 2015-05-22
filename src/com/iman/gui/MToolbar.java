@@ -37,10 +37,20 @@ public class MToolbar extends JToolBar {
 		add.addActionListener(listenerAdd);
 
 		ActionListener listenerManage = (ActionEvent e) -> {
-			new ListOfFilesFrame(user); 
+			new ListOfFilesFrame(user);
+			ManagementFrame.getManagementFrame(user).delete();
 		};
 		manage.addActionListener(listenerManage);
 
+		
+		search.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ManagementFrame.getManagementFrame(user).delete();
+				new SearchFrame();
+			}
+		});
 		setOrientation(VERTICAL);
 		setFloatable(false);
 

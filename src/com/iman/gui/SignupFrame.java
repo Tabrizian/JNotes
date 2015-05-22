@@ -1,8 +1,11 @@
+
 package com.iman.gui;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+
+import com.iman.gui.SignupPanel;
 
 
 public class SignupFrame extends JFrame {
@@ -33,3 +36,4 @@ public class SignupFrame extends JFrame {
 	}
 	
 }
+

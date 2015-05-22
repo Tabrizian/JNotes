@@ -45,44 +45,6 @@ public class NewNoteFrame extends JFrame {
 		keywords.addFocusListener(new TextFieldFocus(
 				"keywords seprated with ','"));
 
-		ActionListener yesListener = (ActionEvent e) -> {
-
-			Note note;
-			if (existed == null) {
-				note = new Note(title.getText(), EditingFrame.getEditingFrame(
-						user).getEditingPane(), user, keywords.getText());
-				note.continueEditing();
-
-			} else {
-				note = existed;
-				note.updateNote(title.getText(), EditingFrame.getEditingFrame(
-						user).getEditingPane(), user, keywords.getText());
-			}
-			note.write();
-			dispose();
-		};
-		yes.addActionListener(yesListener);
-
-		ActionListener noListener = (ActionEvent e) -> {
-			Note note;
-			if (existed == null) {
-				note = new Note(title.getText(), EditingFrame.getEditingFrame(
-						user).getEditingPane(), user, keywords.getText());
-				EditingFrame.getEditingFrame(user).delete();
-				ManagementFrame.getManagementFrame(user);
-			} else {
-				note = existed;
-				note.updateNote(title.getText(), EditingFrame.getEditingFrame(
-						user).getEditingPane(), user, keywords.getText());
-				EditingFrame.getEditingFrame(note).delete();
-				ManagementFrame.getManagementFrame(user);
-			}
-			note.write();
-			
-			dispose();
-		};
-		no.addActionListener(noListener);
-
 		setLayout(new GridBagLayout());
 
 		GridBagConstraints gc = new GridBagConstraints();
@@ -111,6 +73,46 @@ public class NewNoteFrame extends JFrame {
 		gc.gridx = 1;
 		gc.gridy = 2;
 		add(no, gc);
+
+		ActionListener yesListener = (ActionEvent e) -> {
+
+			Note note;
+			if (existed == null) {
+				note = new Note(title.getText(), EditingFrame.getEditingFrame(
+						user).getEditingPane(), user, keywords.getText());
+				note.continueEditing();
+
+			} else {
+				note = existed;
+				note.updateNote(title.getText(),
+						EditingFrame.getEditingFrame(user).getEditingPane(),
+						user, keywords.getText());
+			}
+			note.write();
+			dispose();
+		};
+		yes.addActionListener(yesListener);
+
+		ActionListener noListener = (ActionEvent e) -> {
+			Note note;
+			if (existed == null) {
+				note = new Note(title.getText(), EditingFrame.getEditingFrame(
+						user).getEditingPane(), user, keywords.getText());
+				EditingFrame.getEditingFrame(user).delete();
+				ManagementFrame.getManagementFrame(user);
+			} else {
+				note = existed;
+				note.updateNote(title.getText(),
+						EditingFrame.getEditingFrame(user).getEditingPane(),
+						user, keywords.getText());
+				EditingFrame.getEditingFrame(note).delete();
+				ManagementFrame.getManagementFrame(user);
+			}
+			note.write();
+
+			dispose();
+		};
+		no.addActionListener(noListener);
 
 		setSize(400, 200);
 		setLocation(400, 50);
