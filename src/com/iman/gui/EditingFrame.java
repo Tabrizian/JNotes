@@ -22,7 +22,7 @@ public class EditingFrame extends JFrame {
 		this.user = user;
 		editingPane = new JTextPane();
 
-		toolbar = new EToolbar(user);
+		toolbar = new EToolbar(user,null);
 
 		add(toolbar, BorderLayout.NORTH);
 		add(editingPane, BorderLayout.CENTER);
@@ -41,7 +41,7 @@ public class EditingFrame extends JFrame {
 		editingPane = new JTextPane(note.getStyleOfDocument());
 		editingPane.setText(note.getText());
 
-		toolbar = new EToolbar(user);
+		toolbar = new EToolbar(user,note);
 
 		add(toolbar, BorderLayout.NORTH);
 		add(editingPane, BorderLayout.CENTER);
@@ -60,7 +60,10 @@ public class EditingFrame extends JFrame {
 	}
 
 	public static EditingFrame getEditingFrame(Note note) {
-		return new EditingFrame(note);
+		if(instance == null){
+			instance = new EditingFrame(note);
+		}
+		return instance;
 	}
 
 	public JTextPane getEditingPane() {

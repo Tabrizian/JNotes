@@ -1,4 +1,4 @@
-package com.iman;
+package com.iman.gui;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -11,54 +11,78 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import com.iman.gui.EditingFrame;
-import com.iman.gui.ManagementFrame;
-import com.iman.gui.TextFieldFocus;
+import com.iman.Note;
+import com.iman.User;
 
 public class NewNoteFrame extends JFrame {
 
+	private static final long serialVersionUID = 3120579032104273024L;
 	private JTextField title;
 	private JTextField keywords;
 	private JButton yes;
 	private JButton no;
 	private JLabel message;
+	private Note existed = null;
 
-	public NewNoteFrame(User user) {
+	public NewNoteFrame(User user, Note existed) {
 
 		title = new JTextField(10);
 		keywords = new JTextField(20);
 		yes = new JButton("Yes");
 		no = new JButton("No");
+		this.existed = existed;
+
 		yes.setSize(50, 30);
 		no.setSize(50, 30);
 		message = new JLabel("Do you want to continue editing?");
-		
+
 		title.setForeground(Color.GRAY);
 		title.setText("Title");
 		title.addFocusListener(new TextFieldFocus("Title"));
-		
+
 		keywords.setForeground(Color.GRAY);
 		keywords.setText("keywords seprated with ','");
-		keywords.addFocusListener(new TextFieldFocus("keywords seprated with ','"));
-		
-		ActionListener yesListener = (ActionEvent e)->{
-			Note note = new Note(title.getText(), EditingFrame.getEditingFrame(user).getEditingPane(), user, keywords.getText());
-			
+		keywords.addFocusListener(new TextFieldFocus(
+				"keywords seprated with ','"));
+
+		ActionListener yesListener = (ActionEvent e) -> {
+
+			Note note;
+			if (existed == null) {
+				note = new Note(title.getText(), EditingFrame.getEditingFrame(
+						user).getEditingPane(), user, keywords.getText());
+				note.continueEditing();
+
+			} else {
+				note = existed;
+				note.updateNote(title.getText(), EditingFrame.getEditingFrame(
+						user).getEditingPane(), user, keywords.getText());
+			}
 			note.write();
-			note.continueEditing();
 			dispose();
 		};
 		yes.addActionListener(yesListener);
-		
-		ActionListener noListener = (ActionEvent e)->{
-			Note note = new Note(title.getText(), EditingFrame.getEditingFrame(user).getEditingPane(), user, keywords.getText());
+
+		ActionListener noListener = (ActionEvent e) -> {
+			Note note;
+			if (existed == null) {
+				note = new Note(title.getText(), EditingFrame.getEditingFrame(
+						user).getEditingPane(), user, keywords.getText());
+				EditingFrame.getEditingFrame(user).delete();
+				ManagementFrame.getManagementFrame(user);
+			} else {
+				note = existed;
+				note.updateNote(title.getText(), EditingFrame.getEditingFrame(
+						user).getEditingPane(), user, keywords.getText());
+				EditingFrame.getEditingFrame(note).delete();
+				ManagementFrame.getManagementFrame(user);
+			}
 			note.write();
-			EditingFrame.getEditingFrame(user).delete();
-			ManagementFrame.getManagementFrame(user);
+			
 			dispose();
 		};
 		no.addActionListener(noListener);
-		
+
 		setLayout(new GridBagLayout());
 
 		GridBagConstraints gc = new GridBagConstraints();

@@ -13,7 +13,6 @@ import javax.swing.JToolBar;
 
 import org.apache.commons.io.FileUtils;
 
-import com.iman.NewNoteFrame;
 import com.iman.Note;
 import com.iman.User;
 
@@ -26,7 +25,7 @@ public class EToolbar extends JToolBar {
 	private JComboBox<String> fonts;
 	private JComboBox<Integer> size;
 
-	public EToolbar(User user) {
+	public EToolbar(User user,Note existed) {
 
 		save = new JButton(makeGoodIcon("pics/save.png"));
 		bold = new JButton(makeGoodIcon("pics/font_bold.png"));
@@ -41,7 +40,7 @@ public class EToolbar extends JToolBar {
 		}
 
 		ActionListener saveListener = (ActionEvent e) -> {
-			new NewNoteFrame(user);
+			new NewNoteFrame(user,existed);
 			
 		};
 		save.addActionListener(saveListener);

@@ -5,8 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Date;
@@ -127,6 +129,48 @@ public class Note implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static Note noteExist(String name){
+		File f = new File("data");
+		File[] goodFiles = f.listFiles(new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				return name.startsWith(name);
+			}
+		});
+		if(goodFiles == null){
+			return null;
+		}
+		else
+		{
+			try {
+				ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+						goodFiles[0]));
+				Note note = (Note) in.readObject();
+				in.close();
+				return note;
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+	}
+	
+	public void updateNote(String title, JTextPane editingPane, User user, String keyword){
+		this.title =title;
+		this.text = editingPane.getText();
+		this.styleOfDocument = editingPane.getStyledDocument();
+		this.keywords = keyword.split(",");
+		this.date = new Date();
+		this.user = user;
+		
 	}
 
 }

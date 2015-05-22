@@ -64,5 +64,26 @@ public class MyTableModel extends AbstractTableModel {
 		}
 		return null;
 	}
+	
+	public Note getRowAt(int rowIndex){
+
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+					goodFiles[rowIndex]));
+			Note note = (Note) in.readObject();
+			in.close();
+			return note;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
