@@ -41,10 +41,7 @@ public class EToolbar extends JToolBar {
 		}
 
 		ActionListener saveListener = (ActionEvent e) -> {
-			Note note = new Note("good", EditingFrame.getEditingFrame(user)
-					.getEditingPane(),user,"good,bad");
-			new NewNoteFrame();
-			note.write();
+			new NewNoteFrame(user);
 			
 		};
 		save.addActionListener(saveListener);

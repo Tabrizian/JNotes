@@ -1,15 +1,18 @@
 package com.iman;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import com.iman.gui.MainPanel;
+import com.iman.gui.EditingFrame;
+import com.iman.gui.ManagementFrame;
 import com.iman.gui.TextFieldFocus;
 
 public class NewNoteFrame extends JFrame {
@@ -20,7 +23,7 @@ public class NewNoteFrame extends JFrame {
 	private JButton no;
 	private JLabel message;
 
-	public NewNoteFrame() {
+	public NewNoteFrame(User user) {
 
 		title = new JTextField(10);
 		keywords = new JTextField(20);
@@ -30,7 +33,31 @@ public class NewNoteFrame extends JFrame {
 		no.setSize(50, 30);
 		message = new JLabel("Do you want to continue editing?");
 		
+		title.setForeground(Color.GRAY);
+		title.setText("Title");
+		title.addFocusListener(new TextFieldFocus("Title"));
+		
+		keywords.setForeground(Color.GRAY);
+		keywords.setText("keywords seprated with ','");
 		keywords.addFocusListener(new TextFieldFocus("keywords seprated with ','"));
+		
+		ActionListener yesListener = (ActionEvent e)->{
+			Note note = new Note(title.getText(), EditingFrame.getEditingFrame(user).getEditingPane(), user, keywords.getText());
+			
+			note.write();
+			note.continueEditing();
+			dispose();
+		};
+		yes.addActionListener(yesListener);
+		
+		ActionListener noListener = (ActionEvent e)->{
+			Note note = new Note(title.getText(), EditingFrame.getEditingFrame(user).getEditingPane(), user, keywords.getText());
+			note.write();
+			EditingFrame.getEditingFrame(user).delete();
+			ManagementFrame.getManagementFrame(user);
+			dispose();
+		};
+		no.addActionListener(noListener);
 		
 		setLayout(new GridBagLayout());
 

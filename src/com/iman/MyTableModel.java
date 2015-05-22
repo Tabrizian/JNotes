@@ -45,7 +45,10 @@ public class MyTableModel extends AbstractTableModel {
 			case 1:
 				return note.getTitle();
 			case 2:
+				if(note.getText().length()> 10)
 				return note.getText().substring(0, 10);
+				else
+					return note.getText();
 			case 3:
 				return note.getDate();
 			}

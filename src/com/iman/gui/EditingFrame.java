@@ -66,5 +66,10 @@ public class EditingFrame extends JFrame {
 	public JTextPane getEditingPane() {
 		return editingPane;
 	}
+	
+	public void delete(){
+		dispose();
+		instance = null;
+	}
 
 }
