@@ -1,3 +1,5 @@
+package com.iman.gui;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -10,6 +12,9 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.iman.User;
+import com.iman.UsersDataBase;
 
 public class SignupPanel extends JPanel {
 

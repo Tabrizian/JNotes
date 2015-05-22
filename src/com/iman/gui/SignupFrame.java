@@ -1,3 +1,5 @@
+package com.iman.gui;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;

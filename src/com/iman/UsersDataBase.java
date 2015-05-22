@@ -1,3 +1,4 @@
+package com.iman;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -87,6 +88,8 @@ public class UsersDataBase {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}catch(NullPointerException e){
+			
 		}
 
 	}
@@ -113,5 +116,13 @@ public class UsersDataBase {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public User getUser(String username){
+		for (User user : users) {
+			if(user.getUsername().equals(username))
+				return user;
+		}
+		return null;
 	}
 }

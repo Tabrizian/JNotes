@@ -1,3 +1,4 @@
+package com.iman.gui;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -12,19 +13,21 @@ import javax.swing.JToolBar;
 
 import org.apache.commons.io.FileUtils;
 
+import com.iman.NewNoteFrame;
+import com.iman.Note;
+import com.iman.User;
 
 public class EToolbar extends JToolBar {
-	
+
 	private JButton save;
 	private JButton bold;
 	private JButton italic;
 	private JButton underline;
 	private JComboBox<String> fonts;
 	private JComboBox<Integer> size;
-	
-	
-	public EToolbar(){
-		
+
+	public EToolbar(User user) {
+
 		save = new JButton(makeGoodIcon("pics/save.png"));
 		bold = new JButton(makeGoodIcon("pics/font_bold.png"));
 		italic = new JButton(makeGoodIcon("pics/font_italic.png"));
@@ -32,22 +35,31 @@ public class EToolbar extends JToolBar {
 		fonts = new JComboBox<>();
 		size = new JComboBox<>();
 		fonts.addItem("Hello");
-		
+
 		for (int i = 1; i <= 40; i++) {
 			size.addItem(i);
 		}
-		
+
+		ActionListener saveListener = (ActionEvent e) -> {
+			Note note = new Note("good", EditingFrame.getEditingFrame(user)
+					.getEditingPane(),user,"good,bad");
+			new NewNoteFrame();
+			note.write();
+			
+		};
+		save.addActionListener(saveListener);
+
 		setFloatable(false);
-		
+
 		add(bold);
 		add(italic);
 		add(underline);
 		add(save);
 		add(fonts);
 		add(size);
-		
+
 	}
-	
+
 	private ImageIcon makeGoodIcon(String path) {
 		ImageIcon icon = new ImageIcon(path);
 		Image img = icon.getImage();
@@ -56,7 +68,7 @@ public class EToolbar extends JToolBar {
 		ImageIcon good = new ImageIcon(newImage);
 		return good;
 	}
-	
+
 	@Override
 	protected void addImpl(Component comp, Object constraints, int index) {
 		super.addImpl(comp, constraints, index);
@@ -65,7 +77,5 @@ public class EToolbar extends JToolBar {
 			((JButton) comp).setBorderPainted(false);
 		}
 	}
-	
-	
-	
+
 }

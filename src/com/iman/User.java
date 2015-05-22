@@ -1,3 +1,4 @@
+package com.iman;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,7 +11,6 @@ public class User implements Serializable {
 	private String password;
 	private String degree;
 	private Date dateOfBirth;
-	
 	
 	public User(String firstName, String lastName, String username,
 			String password, String degree, Date dateOfBirth) {

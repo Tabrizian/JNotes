@@ -1,3 +1,6 @@
+package com.iman;
+import com.iman.gui.MainFrame;
+
 
 public class Main {
 

@@ -1,3 +1,4 @@
+package com.iman.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -12,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import com.iman.UsersDataBase;
 
 public class MainPanel extends JPanel {
 
@@ -76,7 +79,7 @@ public class MainPanel extends JPanel {
 		gc.gridx = 1;
 		gc.gridy = 3;
 		add(login, gc);
-		
+
 		gc.weighty = 0.75;
 		gc.gridx = 0;
 		gc.gridy = 3;
@@ -86,15 +89,16 @@ public class MainPanel extends JPanel {
 			if (UsersDataBase.getUsersDataBase().checkValidity(
 					username.getText(), new String(password.getPassword()))) {
 				MainFrame.getMainFrame().delete();
-				ManagementFrame.getManagementFrame();
+				ManagementFrame.getManagementFrame(UsersDataBase
+						.getUsersDataBase().getUser(username.getText()));
 			}
 
 		};
-		
+
 		ActionListener listenerSignup = (ActionEvent e) -> {
-			
-				MainFrame.getMainFrame().delete();
-				SignupFrame.getSignupFrame();
+
+			MainFrame.getMainFrame().delete();
+			SignupFrame.getSignupFrame();
 		};
 
 		login.addActionListener(listenerLogin);

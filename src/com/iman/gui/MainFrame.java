@@ -1,7 +1,10 @@
+package com.iman.gui;
 import java.awt.BorderLayout;
 import java.util.Date;
 
 import javax.swing.JFrame;
+
+import com.iman.User;
 
 public class MainFrame extends JFrame {
 	private static MainFrame instance = null;
